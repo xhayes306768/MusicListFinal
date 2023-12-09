@@ -1,53 +1,46 @@
 ﻿@model List<Artist>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Include your head content here -->
-</head>
-<body>
+@{
+    ViewData["Title"] = "Artist List";
+}
 
-    <!-- Navbar section -->
-    <nav class="navbar navbar-dark">
-        <!-- Navbar content -->
-    </nav>
-
-    <div class="container mt-5">
-        <h1>Artist List</h1>
-
-        <!-- Filter form -->
-        <form method="get" action="/Artist/Index" class="mb-4">
-            <!-- Your filter form content -->
-        </form>
-
-        <!-- Artist table -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Date of Birth</th>
-                    <th>Awards Won</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var artist in Model)
-                {
-                    <tr>
-                        <td>@artist.Name</td>
-                        <td>@artist.DateOfBirth</td>
-                        <td>@artist.AwardsWon</td>
-                        <td>
-                            <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.ArtistId" class="btn btn-primary btn-sm">Edit</a>
-                            <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.ArtistId" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<!-- Filter form -->
+<form method="get" action="/Artist/Index" class="mb-4">
+    <div class="form-row">
+        <div class="col-md-3 mb-2">
+            <input type="text" name="nameFilter" class="form-control" placeholder="Name" value="@ViewBag.NameFilter">
+        </div>
+        <div class="col-md-3 mb-2">
+            <input type="number" name="awardsFilter" class="form-control" placeholder="Awards" value="@ViewBag.AwardsFilter">
+        </div>
+        <div class="col-md-3 mb-2">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
     </div>
+</form>
 
-    <!-- Include your script tags and other necessary scripts here -->
-
-</body>
-</html>
+<!-- Artist table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Awards Won</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var artist in Model)
+        {
+            <tr>
+                <td>@artist.Name</td>
+                <td>@artist.DateOfBirth</td>
+                <td>@artist.AwardsWon</td>
+                <td>
+                    <a asp-controller="Artist" asp-action="Edit" asp-route-id="@artist.ArtistId" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-controller="Artist" asp-action="Delete" asp-route-id="@artist.ArtistId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
