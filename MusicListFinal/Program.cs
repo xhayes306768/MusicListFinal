@@ -1,7 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using MusicListFinal.Models;
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+// Add EF Core DI
+builder.Services.AddDbContext<ArtistContext>(options => options.UseSqlServer(
+builder.Configuration.GetConnectionString("ArtistContext")));
+
+
+
 
 var app = builder.Build();
 
